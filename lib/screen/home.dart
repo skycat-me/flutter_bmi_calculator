@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: Theme.of(context).textTheme.body1,
                     ),
                   ),
-                  ResultRitchText()
+                  Result()
                 ],
               ),
             ),
@@ -91,23 +91,49 @@ class _HomeScreenState extends State<HomeScreen> {
     return newValue;
   }
 
-  Widget ResultRitchText() {
+  Widget Result() {
     if (isResultDisabled) {
       return new Text('(・∀・)スンスンスーン');
     }
     double _weight = double.parse(weightController.text);
     double _height = double.parse(heightController.text);
     // Dartってべき乗演算子ないんだね(´・ω・`)
-    String result = (_weight / math.pow(_height, 2) * 10000).toStringAsFixed(2);
-    return new RichText(
-      textAlign: TextAlign.center,
-      text: new TextSpan(
-        text: 'あなたのBMIは…\n',
-        style: new TextStyle(color: Colors.black),
-        children: <TextSpan>[
-          new TextSpan(text: result, style: DefaultTextStyle.of(context).style),
-        ],
+    String _bmi = (_weight / math.pow(_height, 2) * 10000).toStringAsFixed(2);
+    String _standard_weight =
+        (22 * math.pow(_height, 2) / 10000).toStringAsFixed(2);
+    var status = double.parse(_bmi) >= 25
+        ? '肥満'
+        : double.parse(_bmi) > 18.5 ? '標準' : '低体重';
+
+    return new Column(children: <Widget>[
+      new RichText(
+        textAlign: TextAlign.center,
+        text: new TextSpan(
+          text: 'あなたのBMIは…\n',
+          style: new TextStyle(color: Colors.black),
+          children: <TextSpan>[
+            new TextSpan(text: _bmi, style: DefaultTextStyle.of(context).style),
+          ],
+        ),
       ),
-    );
+      new Padding(padding: EdgeInsets.only(top: 30.0)),
+      new RichText(
+        textAlign: TextAlign.center,
+        text: new TextSpan(
+          text: 'あなたは…\n',
+          style: new TextStyle(color: Colors.black),
+          children: <TextSpan>[
+            new TextSpan(
+                text: '$statusです！',
+                style: new TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                )),
+          ],
+        ),
+      ),
+      new Padding(padding: EdgeInsets.only(top: 30.0)),
+      new Text('標準体重は$_standard_weightでした。')
+    ]);
   }
 }
