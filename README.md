@@ -2,4 +2,4 @@
 BMIを計算するすごいFlutterアプリ
 
 ## Screenshot
-![Screenshot](./screenshot.png)
+![Screenshot](./assets/screenshot.png)

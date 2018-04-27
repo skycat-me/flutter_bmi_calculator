@@ -5,5 +5,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => new MaterialApp(
         home: new HomeScreen(),
+        title: 'Flutter BMI計算機',
       );
 }
