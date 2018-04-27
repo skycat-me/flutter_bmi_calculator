@@ -42,8 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             new RegExp(r'[0-9]')),
                       ],
                       decoration: const InputDecoration(
-                        labelText: '身長(cm)を入力',
-                        hintText: '[0-9]{1, 3}',
+                        labelText: '身長(cm)を入力(整数)',
+                        hintText: '170',
+                        suffixText: 'cm',
                       ),
                       controller: heightController,
                       keyboardType: TextInputType.number,
@@ -58,12 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.symmetric(vertical: 15.0),
                     child: new TextField(
                       inputFormatters: <TextInputFormatter>[
-                        new WhitelistingTextInputFormatter(
-                            new RegExp(r'[0-9]')),
+                        WhitelistingTextInputFormatter.digitsOnly,
                       ],
                       decoration: const InputDecoration(
-                        labelText: '体重(kg)を入力',
-                        hintText: '[0-9]{1, 3}',
+                        labelText: '体重(kg)を入力(整数)',
+                        hintText: '67',
+                        suffixText: 'kg',
                       ),
                       controller: weightController,
                       keyboardType: TextInputType.number,
